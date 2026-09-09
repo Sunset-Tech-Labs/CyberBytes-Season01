@@ -1,0 +1,40 @@
+services:
+  target:
+    image: heywoodlh/vulnerable
+    container_name: target
+    hostname: heywood
+    networks:
+      range_net:
+        ipv4_address: 172.30.0.10
+    ports:
+      - 127.0.0.1:3021:21
+      - 127.0.0.1:3022:22
+      - 127.0.0.1:3080:80
+      - 127.0.0.1:30445:445
+      - 127.0.0.1:30631:631
+      - 127.0.0.1:33000:3000
+      - 127.0.0.1:33500:3500
+      - 127.0.0.1:36697:6697
+      - 127.0.0.1:33306:3306
+      - 127.0.0.1:38181:8181
+    restart: "no"
+    platform: linux/amd64
+
+  attacker:
+    build:
+      context: ./attacker
+    container_name: attacker
+    hostname: kali
+    command: ["sleep", "infinity"]
+    networks:
+      range_net:
+        ipv4_address: 172.30.0.20
+    restart: "no"
+
+networks:
+  range_net:
+    name: cyberrange-isolated
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
