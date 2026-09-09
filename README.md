@@ -5,7 +5,7 @@ Files from the Sunset Tech Labs Cyber Bytes Season 1 playlist
 Below is the directory structure needed; basically the `docker-compose.yaml` file at the top level and then the `attacker` directory below it. Inside the `attacker` directory, you should have a single `Dockerfile`: 
 
 ```
-main-lab-folder/
+CyberBytes-Season01/
 ├── docker-compose.yaml
 ├── attacker/
 │   ├── Dockerfile

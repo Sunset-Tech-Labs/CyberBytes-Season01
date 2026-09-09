@@ -7,6 +7,7 @@ RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         #kali-tools-top10 \  
         #kali-linux-headless \ 
+        nmap \
         curl \
         jq \
         iproute2 \
