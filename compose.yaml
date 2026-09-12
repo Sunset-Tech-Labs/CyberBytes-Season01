@@ -45,6 +45,12 @@ services:
         ipv4_address: 172.30.20.20
       research_lan:
         ipv4_address: 172.30.30.10
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z 172.30.20.20 22 && nc -z 172.30.20.20 143"]
+      interval: 2s
+      timeout: 1s
+      retries: 15
+      start_period: 2s
     restart: "no"
 
   vault:

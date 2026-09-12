@@ -1,0 +1,11 @@
+From: vault-admin@dawnstar.local
+To: relay@dawnstar.local
+Subject: Nightglass archive rotation
+Date: Tue, 14 Nov 2023 22:13:20 +0000
+Message-ID: <1700000000.nightglass@dawnstar.local>
+Content-Type: text/plain; charset=UTF-8
+
+The Project Nightglass archive has moved to 172.30.30.20.
+SMB user: nightglass
+Temporary vault password: Lumen-Archive-47!
+Remove this message after the rotation is complete.
