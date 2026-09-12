@@ -1,6 +1,7 @@
 FROM kalilinux/kali-rolling AS episode-01
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    iproute2 iputils-ping netcat-openbsd nmap \
+    iproute2 iputils-ping libcap2-bin netcat-openbsd nmap \
+    && setcap -r /usr/lib/nmap/nmap \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 FROM episode-01 AS episode-02

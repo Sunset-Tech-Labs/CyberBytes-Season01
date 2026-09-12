@@ -25,6 +25,12 @@ services:
         ipv4_address: 172.30.10.10
       operations_lan:
         ipv4_address: 172.30.20.10
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z 172.30.10.10 21 && nc -z 172.30.10.10 22 && nc -z 172.30.10.10 80"]
+      interval: 2s
+      timeout: 1s
+      retries: 15
+      start_period: 2s
     restart: "no"
 
   operations:

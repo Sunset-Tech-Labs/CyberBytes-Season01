@@ -7,6 +7,7 @@ docker run --rm "$image" bash -lc '
   command -v ip
   command -v ping
   command -v nmap
+  nmap --version
   command -v nc
   command -v curl
   command -v hydra

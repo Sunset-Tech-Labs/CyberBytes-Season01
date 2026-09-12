@@ -1,0 +1,11 @@
+Port 22
+ListenAddress 172.30.10.10
+PermitRootLogin no
+PasswordAuthentication yes
+KbdInteractiveAuthentication no
+UsePAM no
+X11Forwarding no
+PrintMotd no
+Subsystem sftp /usr/lib/openssh/sftp-server
+PidFile /run/sshd.pid
+LogLevel VERBOSE
