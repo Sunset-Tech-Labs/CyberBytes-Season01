@@ -91,6 +91,7 @@ start_episode 04
 "${compose[@]}" exec -T perimeter test -f /var/log/auth.log
 "${compose[@]}" exec -T perimeter test -f /root/.bash_history
 "${compose[@]}" exec -T perimeter sh -c '
+  set -eu
   test "$(stat -c %a /root/operations-access.conf)" = 600
   test "$(grep -c "^" /root/operations-access.conf)" = 3
   grep -Fx "host=172.30.20.20" /root/operations-access.conf
