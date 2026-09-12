@@ -1,0 +1,71 @@
+name: dawnstar-range
+
+services:
+  attacker:
+    build:
+      context: .
+      dockerfile: attacker/Dockerfile
+      target: episode-08
+    hostname: kali
+    command: ["sleep", "infinity"]
+    networks:
+      dmz:
+        ipv4_address: 172.30.10.20
+    restart: "no"
+
+  perimeter:
+    build:
+      context: .
+      dockerfile: targets/perimeter/Dockerfile
+    hostname: perimeter
+    environment:
+      LAB_EPISODE: "01"
+    networks:
+      dmz:
+        ipv4_address: 172.30.10.10
+      operations_lan:
+        ipv4_address: 172.30.20.10
+    restart: "no"
+
+  operations:
+    build:
+      context: .
+      dockerfile: targets/operations/Dockerfile
+    hostname: operations
+    environment:
+      LAB_EPISODE: "01"
+    networks:
+      operations_lan:
+        ipv4_address: 172.30.20.20
+      research_lan:
+        ipv4_address: 172.30.30.10
+    restart: "no"
+
+  vault:
+    build:
+      context: .
+      dockerfile: targets/vault/Dockerfile
+    hostname: vault
+    environment:
+      LAB_EPISODE: "01"
+    networks:
+      research_lan:
+        ipv4_address: 172.30.30.20
+    restart: "no"
+
+networks:
+  dmz:
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.30.10.0/24
+  operations_lan:
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.30.20.0/24
+  research_lan:
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.30.30.0/24
