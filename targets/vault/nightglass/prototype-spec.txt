@@ -1,0 +1,10 @@
+PROJECT NIGHTGLASS — FICTIONAL PROTOTYPE SPECIFICATION
+
+Training scenario: NG-LS-7 low-light sensor
+
+The fictional NG-LS-7 combines a simulated photon-counting array with an
+imaginary adaptive noise filter for educational mission storytelling. All
+measurements, components, and capabilities described here are invented and
+must not be interpreted as real engineering data.
+
+Archive retrieval token: DAWNSTAR-NIGHTGLASS-RETRIEVED
