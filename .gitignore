@@ -1,0 +1,22 @@
+# Internal planning and brainstorming artifacts
+.planning/
+.superpowers/
+.worktrees/
+
+# Local configuration and secrets
+.env
+.env.local
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs and temporary files
+*.log
+tmp/
+
+# macOS metadata
+.DS_Store
