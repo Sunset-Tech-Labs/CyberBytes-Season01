@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  printf '%s\n' 'Usage: ./scripts/lab {up|build|status|config|down|reset} {1-8}' >&2
+  exit 2
+}
+
+[[ $# -eq 2 ]] || usage
+command_name="$1"
+[[ "$2" =~ ^[1-8]$ ]] || usage
+printf -v episode '%02d' "$2"
+
+case "$command_name" in
+  up|build|status|config|down|reset) ;;
+  *) usage ;;
+esac
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+repo_root="$(cd "$script_dir/.." && pwd)"
+cd "$repo_root"
+
+compose=(
+  docker compose
+  -p "dawnstar-e${episode}"
+  -f compose.yaml
+  -f "episodes/compose.episode-${episode}.yaml"
+)
+
+case "$command_name" in
+  up) "${compose[@]}" up -d --build ;;
+  build) "${compose[@]}" build ;;
+  status) "${compose[@]}" ps ;;
+  config) "${compose[@]}" config ;;
+  down) "${compose[@]}" down --remove-orphans ;;
+  reset)
+    "${compose[@]}" down -v --remove-orphans
+    "${compose[@]}" up -d --build
+    ;;
+esac

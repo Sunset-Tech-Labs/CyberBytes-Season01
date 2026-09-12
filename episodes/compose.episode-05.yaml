@@ -1,0 +1,13 @@
+services:
+  attacker:
+    build:
+      target: episode-05
+  perimeter:
+    environment:
+      LAB_EPISODE: "05"
+  operations:
+    environment:
+      LAB_EPISODE: "05"
+  vault:
+    environment:
+      LAB_EPISODE: "05"
