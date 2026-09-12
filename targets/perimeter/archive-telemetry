@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+mkdir -p /var/backups
+tar -czf /var/backups/telemetry.tgz /var/log/telemetry 2>/dev/null

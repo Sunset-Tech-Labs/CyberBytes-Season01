@@ -1,0 +1,2 @@
+Defaults:telemetry secure_path=/home/telemetry/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+telemetry ALL=(root) NOPASSWD: /usr/local/sbin/archive-telemetry
