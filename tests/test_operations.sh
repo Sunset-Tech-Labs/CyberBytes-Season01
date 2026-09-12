@@ -49,6 +49,12 @@ wait_for_operations_ready
 '
 
 "${compose[@]}" exec -T operations sh -ec '
-  ! nc -z -w 1 172.30.30.10 22
-  ! nc -z -w 1 172.30.30.10 143
+  if nc -z -w 1 172.30.30.10 22; then
+    echo "SSH must not listen on the Research address" >&2
+    exit 1
+  fi
+  if nc -z -w 1 172.30.30.10 143; then
+    echo "IMAP must not listen on the Research address" >&2
+    exit 1
+  fi
 '
