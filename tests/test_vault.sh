@@ -4,8 +4,10 @@ set -euo pipefail
 project="dawnstar-test-vault"
 compose=(docker compose -p "$project" -f compose.yaml)
 started=0
+anonymous_output="$(mktemp)"
 
 cleanup() {
+  rm -f "$anonymous_output"
   if [[ "$started" -eq 1 ]]; then
     "${compose[@]}" down -v --remove-orphans
   fi
@@ -49,8 +51,20 @@ wait_for_vault_ready
     grep -F "DAWNSTAR-NIGHTGLASS-RETRIEVED"
 '
 
-if "${compose[@]}" exec -T operations \
-  smbclient //172.30.30.20/research -N -c 'ls'; then
+set +e
+"${compose[@]}" exec -T operations \
+  smbclient //172.30.30.20/research -N -c 'ls' \
+  >"$anonymous_output" 2>&1
+anonymous_status=$?
+set -e
+
+if [[ "$anonymous_status" -eq 0 ]]; then
   echo "unauthenticated clients must not read the research share" >&2
+  exit 1
+fi
+
+if ! grep -Fq 'NT_STATUS_ACCESS_DENIED' "$anonymous_output"; then
+  echo "anonymous access failed without the expected access-denied response" >&2
+  cat "$anonymous_output" >&2
   exit 1
 fi

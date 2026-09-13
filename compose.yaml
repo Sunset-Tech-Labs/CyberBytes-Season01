@@ -12,7 +12,7 @@ services:
       dmz:
         ipv4_address: 172.30.10.20
     healthcheck:
-      test: ["CMD-SHELL", "ip -brief address >/dev/null && nmap --version >/dev/null && ssh -V >/dev/null 2>&1"]
+      test: ["CMD-SHELL", "ip -brief address >/dev/null && nmap --version >/dev/null && command -v nc >/dev/null"]
       interval: 3s
       timeout: 2s
       retries: 20

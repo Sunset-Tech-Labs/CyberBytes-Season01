@@ -3,7 +3,7 @@ set -euo pipefail
 
 image="dawnstar-attacker-test"
 docker build --target episode-08 -f attacker/Dockerfile -t "$image" .
-docker run --rm "$image" bash -lc '
+docker run --rm "$image" bash -euc '
   command -v ip
   command -v ping
   command -v nmap

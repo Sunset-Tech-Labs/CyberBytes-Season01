@@ -18,7 +18,7 @@ The range uses internal Docker networks and does not publish target ports to the
 - A terminal capable of running Bash scripts
 - Basic familiarity with Linux, TCP/IP networking, Docker, authorization, and lab safety
 
-The images support both `linux/amd64` and `linux/arm64`, including Intel/AMD Linux systems and Apple Silicon through Docker Desktop. All images build locally; no prebuilt Dawnstar image is required.
+The images are designed for both `linux/amd64` and `linux/arm64`, including Intel/AMD Linux systems and Apple Silicon through Docker Desktop. The current release gate cross-builds both platforms under emulation on Apple Silicon. A native Intel/AMD smoke test is still required before a public release. All images build locally; no prebuilt Dawnstar image is required.
 
 ## Get started
 
@@ -52,6 +52,8 @@ docker compose \
 ## Lab commands
 
 Every command accepts one episode number from 1 through 8. Each episode uses a separate Compose project and an immutable starting checkpoint.
+
+Because every episode uses the same fixed lab subnets, stop the current episode with `./scripts/lab down EPISODE_NUMBER` before starting a different one. Running two episodes at once causes a Docker subnet conflict.
 
 ```bash
 ./scripts/lab build 1   # build without starting
