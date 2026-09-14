@@ -2,6 +2,7 @@ name: dawnstar-range
 
 services:
   attacker:
+    container_name: attacker
     build:
       context: .
       dockerfile: attacker/Dockerfile
@@ -20,6 +21,7 @@ services:
     restart: "no"
 
   perimeter:
+    container_name: perimeter
     build:
       context: .
       dockerfile: targets/perimeter/Dockerfile
@@ -40,6 +42,7 @@ services:
     restart: "no"
 
   operations:
+    container_name: operations-server
     build:
       context: .
       dockerfile: targets/operations/Dockerfile
@@ -60,6 +63,7 @@ services:
     restart: "no"
 
   vault:
+    container_name: vault
     build:
       context: .
       dockerfile: targets/vault/Dockerfile
